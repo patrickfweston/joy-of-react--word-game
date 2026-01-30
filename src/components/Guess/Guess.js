@@ -1,13 +1,15 @@
 import React from "react";
 
+import { range } from "../../utils";
+import { WORD_LENGTH } from "../../constants";
+
+const EMPTY_CELLS = range(0, WORD_LENGTH).map(() => ({
+  letter: "",
+  status: "",
+}));
+
 function Guess({ word }) {
-  word = word ?? [
-    { letter: "", status: "" },
-    { letter: "", status: "" },
-    { letter: "", status: "" },
-    { letter: "", status: "" },
-    { letter: "", status: "" },
-  ];
+  word = word ?? EMPTY_CELLS;
 
   return (
     <p className="guess">

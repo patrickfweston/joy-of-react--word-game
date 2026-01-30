@@ -1,13 +1,12 @@
 import React from "react";
 
-import { sample } from "../../utils";
-import Guess from "../Guess/Guess";
-import GuessForm from "../GuessForm/GuessForm";
+import { sample, range } from "../../utils";
 import { WORDS } from "../../data";
-import { range } from "../../utils";
-import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import { NUM_OF_GUESSES_ALLOWED, GAME_STATUS } from "../../constants";
 import { checkGuess } from "../../game-helpers";
-import StatusBanner from "../StatusBanner/StatusBanner";
+import Guess from "../Guess";
+import GuessForm from "../GuessForm";
+import StatusBanner from "../StatusBanner";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -19,7 +18,7 @@ function Game() {
     range(0, NUM_OF_GUESSES_ALLOWED).map(() => ""),
   );
   const [currentGuessCount, setCurrentGuessCount] = React.useState(0);
-  const [gameStatus, setGameStatus] = React.useState("");
+  const [gameStatus, setGameStatus] = React.useState(GAME_STATUS.PLAYING);
 
   function handleGuess(guess) {
     // Update the guesses array with the new guess.
@@ -32,9 +31,9 @@ function Game() {
 
     // Check for win/loss condition.
     if (guess === answer) {
-      setGameStatus("won");
+      setGameStatus(GAME_STATUS.WON);
     } else if (currentGuessCount + 1 === NUM_OF_GUESSES_ALLOWED) {
-      setGameStatus("lost");
+      setGameStatus(GAME_STATUS.LOST);
     }
   }
 

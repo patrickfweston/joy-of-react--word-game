@@ -1,5 +1,7 @@
 import React from "react";
 
+import { WORD_LENGTH } from "../../constants";
+
 function GuessForm({ handleGuess }) {
   return (
     <form
@@ -16,9 +18,9 @@ function GuessForm({ handleGuess }) {
       <input
         id="guess-input"
         type="text"
-        pattern=".{5,5}"
-        title="You must enter a five letter word"
-        maxLength={5}
+        pattern={`.{${WORD_LENGTH},${WORD_LENGTH}}`}
+        title={`You must enter a ${WORD_LENGTH} letter word`}
+        maxLength={WORD_LENGTH}
         required
         onChange={(event) => {
           event.target.value = event.target.value.toUpperCase();
